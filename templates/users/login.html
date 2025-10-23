@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Вход</h2>
+
+{% include "components/flash.html" %}
+
+<form method="post" action="{{ url_for('auth.login') }}">
+  <div>
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" required />
+  </div>
+  <div>
+    <label for="password">Пароль</label>
+    <input type="password" name="password" id="password" minlength="8" required />
+  </div>
+  <button type="submit">Войти</button>
+</form>
+{% endblock %}

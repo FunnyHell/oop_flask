@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>{{title}}</h1>
+    {% if items %}
+        {% for post in items %}
+            <article>
+                <h3>
+                    <a href="{{url_for('posts.show', post_id=post['id']) }}">{{ post["title"] }}</a>
+                </h3>
+                <p></p>
+            </article>
+        {% endfor %}
+    {% else %}
+
+    {% endif %}
+{% endblock %}
