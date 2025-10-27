@@ -1,0 +1,7 @@
+__pycache__/
+.venv/
+img/
+
+*.excalidraw
+tmp.py
+*.db

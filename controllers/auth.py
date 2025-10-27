@@ -16,13 +16,15 @@ class AuthController:
         if sid:
             conn = self.get_db()
             store = SessionStore(conn, self.session_ttl_minutes)
-            user_id = store.get_valid(sid).get("user_id")
+            user_id = store.get_valid(sid)
             
             if user_id:
+                user_id = user_id.get("user_id")
                 model = User(conn)
                 user = model.find_by_id(user_id)
                 if user:
                     g.user = user
+        return redirect(url_for('posts.index'))
         
     def register(self):
         if request.method == "GET":
