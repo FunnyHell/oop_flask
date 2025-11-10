@@ -54,7 +54,13 @@ class Application:
             CREATE TABLE IF NOT EXISTS posts (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
-            content TEXT NOT NULL
+            content TEXT NOT NULL,
+            views INTEGER DEFAULT 0,
+            likes INTEGER DEFAULT 0,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            author_id INTEGER,
+            FOREIGN KEY(author_id) REFERENCES users(id) ON DELETE SET NULL
             );
         """
         )

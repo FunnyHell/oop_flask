@@ -3,34 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+          integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <header>
-        <h1>Сайт</h1>
-        <nav>
-            <ul>
-                <!-- TODO: Дописать при неавторизованном -->
-                 {% if not g.user %}
-                <li><a href="{{url_for('auth.login')}}">Логин</a></li>
-                <li><a href="{{url_for('auth.register')}}">Регистрация</a></li>
-                <!-- TODO: Дописать при авторизованном -->
-                 {% else %}
-                <li><a href="{{url_for('auth.profile')}}">Профиль</a></li>
-                <li><a href="{{url_for('auth.logout')}}">Выйти</a></li>
-                <li><a href="#">Добавить пост</a></li>
-                {% endif %}
-                <li><a href="#">Посты</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        {%  block content %} {% endblock %}
-    </main>
+<header>
+    <h1>Сайт</h1>
+    <nav>
+        <ul>
 
-    <footer>
-        <p>© Все права защищены, 2025</p>
-    </footer>
+            {% if not g.user %}
+                <li><a href="{{ url_for('auth.login') }}">Логин</a></li>
+                <li><a href="{{ url_for('auth.register') }}">Регистрация</a></li>
+          
+            {% else %}
+                <li><a href="{{ url_for('auth.profile') }}">Профиль</a></li>
+                <li>
+                    <form action="{{ url_for('auth.logout') }}" method="post">
+                        <button type="submit">Выйти</button>
+                    </form>
+                <li><a href="{{ url_for('posts.create') }}">Добавить пост</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('posts.index') }}">Посты</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    {% block content %} {% endblock %}
+</main>
+
+<footer>
+    <p>© Все права защищены, 2025</p>
+</footer>
 </body>
 </html>

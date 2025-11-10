@@ -1,13 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>{{title}}</h1>
+    <h1>{{ title }}</h1>
+
+    {% include 'components/flash.html' %}
+
     {% if items %}
         {% for post in items %}
-            <article>
-                <h3>
-                    <a href="{{url_for('posts.show', post_id=post['id']) }}">{{ post["title"] }}</a>
-                </h3>
-                <p></p>
+            <article class="post-card">
+                <div class="post-card-header">
+                    <h2>
+                        <a href="{{ url_for('posts.show', post_id=post['id']) }}">{{ post['title'] }}</a>
+                    </h2>
+                    <h3>
+                        <a href="{{ url_for('auth.profile', user_id=post['author_id']) }}">
+                            {{ post['name'] }}</a>
+                    </h3>
+                </div>
+                <div class="post-card-preview">
+                    {{ post['content'][:100] }}...
+                </div>
+                <div class="post-card-bottom">
+                    <div class="post-card-bottom-left">
+                        <span><i class="fa-solid fa-heart"></i>{{ post['likes'] }}</span>
+                        <span><i class="fa-solid fa-eye"></i>{{ post['views'] }}</span>
+                    </div>
+                    <div class="post-card-bottom-right">
+                    <span>
+                        {{ post['created_at'] if post['created_at'] else "неизв." }}
+                    </span>
+                    </div>
+                </div>
             </article>
         {% endfor %}
     {% else %}
