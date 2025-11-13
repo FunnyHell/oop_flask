@@ -1,6 +1,6 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% block content %}
-<form action="{{url_for('posts.edit')}}" method="post">
+<form action="{{url_for('posts.edit', post_id = post.id)}}" method="post">
     <div>
         <label for="title">Название</label>
         <input type="text" name="title" id="title" value="{{post.title}}"/>

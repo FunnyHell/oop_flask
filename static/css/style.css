@@ -1,29 +1,222 @@
-/* Основные стили для страницы постов */
+/* ============================================
+   ПЕРЕМЕННЫЕ И ГЛОБАЛЬНЫЕ СТИЛИ
+   ============================================ */
+
+:root {
+    --primary-color: #0066cc;
+    --primary-hover: #0052a3;
+    --secondary-color: #667eea;
+    --danger-color: #f56565;
+    --danger-hover: #e53e3e;
+    --success-color: #48bb78;
+    --warning-color: #ed8936;
+    --info-color: #4299e1;
+
+    --text-primary: #1a1a1a;
+    --text-secondary: #555;
+    --text-muted: #888;
+    --text-light: #aaa;
+
+    --bg-primary: #fff;
+    --bg-secondary: #f8f9fa;
+    --border-color: #e8e8e8;
+    --border-light: #f0f0f0;
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--primary-hover);
+}
+
+/* ============================================
+   HEADER И НАВИГАЦИЯ
+   ============================================ */
+
+header {
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.5rem 0;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding: 0 2rem;
+    color: var(--text-primary);
+}
+
+header nav {
+    padding: 0 2rem;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+}
+
+header nav a,
+header nav button {
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+header nav a:hover {
+    color: var(--primary-color);
+}
+
+header nav button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+header nav button:hover {
+    color: var(--primary-color);
+}
+
+/* ============================================
+   ОСНОВНОЙ КОНТЕНТ
+   ============================================ */
+
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: calc(100vh - 200px);
+}
+
 h1 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 2rem;
-    color: #1a1a1a;
+    color: var(--text-primary);
 }
 
-/* Стили для карточки поста */
+h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+/* ============================================
+   FLASH СООБЩЕНИЯ
+   ============================================ */
+
+.flashes {
+    list-style: none;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.flashes li {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.flashes li.warning {
+    background-color: #fef3c7;
+    color: #92400e;
+    border-left: 4px solid var(--warning-color);
+}
+
+.flashes li.danger {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border-left: 4px solid var(--danger-color);
+}
+
+.flashes li.success {
+    background-color: #dcfce7;
+    color: #166534;
+    border-left: 4px solid var(--success-color);
+}
+
+.flashes li.info {
+    background-color: #dbeafe;
+    color: #0c2340;
+    border-left: 4px solid var(--info-color);
+}
+
+/* ============================================
+   КАРТОЧКИ ПОСТОВ
+   ============================================ */
+
 .post-card {
-    background: #fff;
-    border: 1px solid #e8e8e8;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
 }
 
 .post-card:hover {
     border-color: #d0d0d0;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
     transform: translateY(-2px);
 }
 
-/* Заголовок и автор */
 .post-card-header {
     margin-bottom: 1rem;
 }
@@ -36,35 +229,32 @@ h1 {
 }
 
 .post-card-header h2 a {
-    color: #1a1a1a;
-    text-decoration: none;
+    color: var(--text-primary);
     transition: color 0.2s ease;
 }
 
 .post-card-header h2 a:hover {
-    color: #0066cc;
+    color: var(--primary-color);
 }
 
 .post-card-header h3 {
     font-size: 0.95rem;
     font-weight: 500;
     margin: 0;
-    color: #666;
+    color: var(--text-muted);
 }
 
 .post-card-header h3 a {
-    color: #666;
-    text-decoration: none;
+    color: var(--text-muted);
     transition: color 0.2s ease;
 }
 
 .post-card-header h3 a:hover {
-    color: #0066cc;
+    color: var(--primary-color);
 }
 
-/* Превью контента */
 .post-card-preview {
-    color: #555;
+    color: var(--text-secondary);
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 1.25rem;
@@ -74,15 +264,14 @@ h1 {
     overflow: hidden;
 }
 
-/* Нижняя часть карточки */
 .post-card-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 1rem;
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid var(--border-light);
     font-size: 0.9rem;
-    color: #888;
+    color: var(--text-muted);
 }
 
 .post-card-bottom-left {
@@ -94,12 +283,14 @@ h1 {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    transition: color 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
     cursor: pointer;
+    user-select: none;
 }
 
 .post-card-bottom-left span:hover {
-    color: #0066cc;
+    color: var(--primary-color);
+    transform: scale(1.05);
 }
 
 .post-card-bottom-left i {
@@ -107,15 +298,304 @@ h1 {
 }
 
 .post-card-bottom-right span {
-    color: #aaa;
+    color: var(--text-light);
     font-size: 0.85rem;
 }
 
-/* Адаптивность */
+/* ============================================
+   СТРАНИЦА ПОКАЗА ПОСТА
+   ============================================ */
+
+.post-full {
+    background: var(--bg-primary);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.post-full h1 {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.post-full-meta {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.post-full-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.post-full-content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    word-break: break-word;
+}
+
+.post-actions {
+    display: flex;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-light);
+}
+
+/* ============================================
+   ФОРМЫ
+   ============================================ */
+
+form {
+    background: var(--bg-primary);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+    max-width: 600px;
+}
+
+form div {
+    margin-bottom: 1.5rem;
+}
+
+form label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="number"],
+form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus,
+form input[type="number"]:focus,
+form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 200px;
+}
+
+/* ============================================
+   КНОПКИ
+   ============================================ */
+
+button, .btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+button:hover, .btn:hover {
+    transform: translateY(-2px);
+}
+
+button:active, .btn:active {
+    transform: translateY(0);
+}
+
+/* Primary Button */
+button[type="submit"],
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+button[type="submit"]:hover,
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5568d3;
+}
+
+/* Danger Button */
+.btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-hover);
+}
+
+/* Success Button */
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #38a169;
+}
+
+/* Outline Button */
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* ============================================
+   ПРОФИЛЬ
+   ============================================ */
+
+.profile-container {
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.profile-card {
+    background: var(--bg-primary);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    padding: 2rem;
+}
+
+.profile-info {
+    margin-bottom: 2rem;
+}
+
+.info-group {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.info-group:last-child {
+    border-bottom: none;
+}
+
+.info-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.info-group p {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.profile-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-logout {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-logout:hover {
+    background-color: #5568d3;
+}
+
+.btn-logout-all {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.btn-logout-all:hover {
+    background-color: var(--danger-hover);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer {
+    background-color: var(--bg-primary);
+    border-top: 1px solid var(--border-color);
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-muted);
+    margin-top: auto;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* ============================================
+   АДАПТИВНОСТЬ - ПЛАНШЕТЫ
+   ============================================ */
+
 @media (max-width: 768px) {
+    header h1 {
+        font-size: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    header nav {
+        padding: 0 1rem;
+    }
+
+    header nav ul {
+        gap: 1rem;
+    }
+
+    main {
+        padding: 1.5rem;
+    }
+
     h1 {
         font-size: 2rem;
         margin-bottom: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
     }
 
     .post-card {
@@ -136,32 +616,140 @@ h1 {
     .post-card-bottom-left {
         width: 100%;
     }
+
+    form {
+        max-width: 100%;
+        padding: 1.5rem;
+    }
+
+    .post-actions {
+        flex-direction: column;
+    }
+
+    .profile-actions {
+        flex-direction: column;
+    }
+
+    .profile-actions button {
+        width: 100%;
+    }
 }
 
+/* ============================================
+   АДАПТИВНОСТЬ - МОБИЛЬНЫЕ
+   ============================================ */
+
 @media (max-width: 480px) {
+    header h1 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
     h1 {
         font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
     }
 
     .post-card {
         padding: 1rem;
         border-radius: 8px;
+        margin-bottom: 0.75rem;
     }
 
     .post-card-header h2 {
         font-size: 1.1rem;
+        margin: 0 0 0.3rem 0;
     }
 
     .post-card-header h3 {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     .post-card-preview {
         font-size: 0.95rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .post-card-bottom {
+        font-size: 0.8rem;
     }
 
     .post-card-bottom-left {
         gap: 1rem;
     }
+
+    form {
+        padding: 1rem;
+    }
+
+    button, .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.95rem;
+        width: 100%;
+    }
+
+    .post-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .post-actions button,
+    .post-actions a {
+        width: 100%;
+    }
+
+    .profile-container {
+        margin: 1rem auto;
+    }
+
+    .profile-card {
+        padding: 1rem;
+    }
 }
+
+/* ============================================
+   УТИЛИТЫ
+   ============================================ */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mt-4 { margin-top: 2rem; }
+
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }
+
+.gap-1 { gap: 0.5rem; }
+.gap-2 { gap: 1rem; }
+.gap-3 { gap: 1.5rem; }
+.gap-4 { gap: 2rem; }

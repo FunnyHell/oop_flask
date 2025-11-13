@@ -9,6 +9,4 @@ def create_posts_blueprint(controller: PostsController):
     bp.add_url_rule("/create", "create", controller.create, methods=["GET", "POST"])
     bp.add_url_rule("/<int:post_id>/edit", "edit", controller.edit, methods=["GET", "POST"])
     bp.add_url_rule("/<int:post_id>/delete", "delete", controller.delete, methods=["POST"])
-
-
     return bp

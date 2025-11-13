@@ -42,7 +42,7 @@ class PostsController:
             flash("Не заполнены все поля", "warning")
             error = True
         if len(title) < 5:
-            flash("Заголовок должеен быть не менее 5 символов", "warning")
+            flash("Заголовок должен быть не менее 5 символов", "warning")
             error = True
         if len(content) < 10:
             flash("Текст должен быть не менее 10 символов", "warning")

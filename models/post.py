@@ -81,50 +81,50 @@ class Post:
         return cur.rowcount > 0
 
 
-def get_by_author(self, author_id):
-    cur = self.conn.execute(
-        """
-        SELECT *
-        FROM posts
-        WHERE author_id = ?
-        """,
-        [author_id],
-    )
-    return [dict(r) for r in cur.fetchall()]
+    def get_by_author(self, author_id):
+        cur = self.conn.execute(
+            """
+            SELECT *
+            FROM posts
+            WHERE author_id = ?
+            """,
+            [author_id],
+        )
+        return [dict(r) for r in cur.fetchall()]
 
 
-def search(self, query):
-    search_term = f"%{query}%"
-    cur = self.conn.execute(
-        """
-        SELECT *
-        FROM posts
-        WHERE title LIKE ?
-           OR content LIKE ?
-        """,
-        [search_term, search_term],
-    )
-    return [dict(r) for r in cur.fetchall()]
+    def search(self, query):
+        search_term = f"%{query}%"
+        cur = self.conn.execute(
+            """
+            SELECT *
+            FROM posts
+            WHERE title LIKE ?
+               OR content LIKE ?
+            """,
+            [search_term, search_term],
+        )
+        return [dict(r) for r in cur.fetchall()]
 
 
-def get_top_viewed(self, limit=10):
-    '''
-    Вернуть какое-то количество самых популярных статей (10, 15, ...)
-    '''
-    cur = self.conn.execute(
-        """
-        SELECT *
-        FROM posts
-        ORDER BY views DESC LIMIT ?
-        """, [limit],
-    )
-    return [dict(r) for r in cur.fetchall()]
+    def get_top_viewed(self, limit=10):
+        '''
+        Вернуть какое-то количество самых популярных статей (10, 15, ...)
+        '''
+        cur = self.conn.execute(
+            """
+            SELECT *
+            FROM posts
+            ORDER BY views DESC LIMIT ?
+            """, [limit],
+        )
+        return [dict(r) for r in cur.fetchall()]
 
 
-def count_all(self):
-    '''
-    Возвращает кол-во статей на сайте
-    '''
-    cur = self.conn.execute("SELECT COUNT(*) as count FROM posts")
-    row = cur.fetchone()
-    return row["count"] if row else 0
+    def count_all(self):
+        '''
+        Возвращает кол-во статей на сайте
+        '''
+        cur = self.conn.execute("SELECT COUNT(*) as count FROM posts")
+        row = cur.fetchone()
+        return row["count"] if row else 0
