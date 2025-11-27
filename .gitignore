@@ -1,7 +1,45 @@
+# Python
 __pycache__/
-.venv/
-img/
+*.py[cod]
+*$py.class
 
-*.excalidraw
+# Virtual Environment
+.venv/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Project specific
+img/
 tmp.py
+*.excalidraw
+
+# Database
 *.db
+app_core/*.db
+
+# Environment
+.env
+.env.*
+
+# Testing & Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Logs
+*.log
+logs/
+/.idea/.gitignore
+/.idea/dataSources.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/oop_flask.iml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/sqldialects.xml
+/.idea/vcs.xml
