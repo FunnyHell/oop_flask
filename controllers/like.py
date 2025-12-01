@@ -35,6 +35,7 @@ class LikeController:
 
             {
                 "success": true,
+                "message": "ok",
                 "likes_count": 42
             }
 
@@ -129,8 +130,6 @@ class LikeController:
             },
         ), 200
 
-    # TODO: Дописываем обязательный минимум методов для LikeController (API)
-    #  → Refactor → Тесты/тестовые запросы
     def get_post_likes_info(self, post_id):
         conn = self.get_db()
         post_model = Post(conn)
@@ -139,26 +138,92 @@ class LikeController:
             return jsonify({"success": False, "message": "Post not found"}), 404
 
         info = like_model.get_post_likes_info(post_id)
+        return jsonify({"success": True, **info, }), 200
 
-    #     TODO: get_post_likes_info в модели, должен вернуть
-    #      {
-    #      "info": get_users_who_likes(post_id),
-    #      "likes_count": get_likes_count(post_id)
-    #      }
+    def get_likes_count(self, post_id):
+        """Return likes count for post
 
-    def get_likes_count(self):
-        # TODO: return: {"success": True, "likes_count": N}
-        #               {"success": False, "message": "Post not found"}
-        pass
+                :param post_id: ID of the post to like
+                :type post_id: int
 
-    def get_users_who_liked(self):
-        # users = like_model.get_user_who_likes(post_id)
-        # TODO: return: {"success": True,
-        #               "users": [{"id": 1, ...}, {...},...],
-        #               "count": N}
-        #
-        #               {"success": False, "message": "Post not found"}
-        pass
+                :return: JSON response with success flag and like count
+                :rtype: flask.Response
+
+                **Example successful response**:
+
+                .. code-block:: JSON
+
+                    {
+                        "success": true,
+                        "likes_count": 42
+                    }
+
+                **Example error response**:
+
+                .. code-block:: JSON
+
+                    {
+                        "success": false,
+                        "message": "Post not found"
+                    }
+                """
+        conn = self.get_db()
+        post_model = Post(conn)
+        like_model = Like(conn)
+        if not post_model.get(post_id):
+            return jsonify({"success": False, "message": "Post not found"}), 404
+
+        likes_count = like_model.get_likes_count(post_id)
+        return jsonify({"success": True, "likes_count": likes_count}), 200
+
+    def get_users_who_liked(self, post_id, limit=None):
+        """Return users who liked post
+
+                :param post_id: ID of the post to like
+                :type post_id: int
+
+                :param limit: limit of users to return
+                :type limit: int
+
+                :return: JSON response with success flag and like count
+                :rtype: flask.Response
+
+                **Example successful response**:
+
+                .. code-block:: JSON
+
+                    {
+                        "success": true,
+                        "message": "ok",
+                        "users": [{"id": 1, ...}, {...},...]
+                        "count": 5
+                    }
+
+                **Example error response**:
+
+                .. code-block:: JSON
+
+                    {
+                        "success": false,
+                        "message": "Post not found"
+                    }
+                """
+        conn = self.get_db()
+        post_model = Post(conn)
+        like_model = Like(conn)
+        if not post_model.get(post_id):
+            return jsonify({"success": False, "message": "Post not found"}), 404
+        if limit:
+            users = like_model.get_users_who_likes(post_id, limit)
+        else:
+            users = like_model.get_users_who_likes(post_id)
+        return jsonify(
+            {
+                "success": True,
+                "users": users,
+                "count": len(users),
+            },
+        ), 200
 
     # ==========================================================================
 

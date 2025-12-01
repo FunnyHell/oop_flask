@@ -54,6 +54,12 @@ class Like:
         row = cur.fetchone()
         return row["count"] if row else 0
 
+    def get_post_likes_info(self, post_id: int):
+        return {
+            "users": self.get_users_who_likes(post_id),
+            "likes_count": self.get_likes_count(post_id)
+        }
+
     def get_users_who_likes(self, post_id, limit=10):
     # likes → l user → u.id, u.name, l.created_at
         cur = self.conn.execute(
@@ -64,10 +70,10 @@ class Like:
             WHERE l.post_id = ?
             ORDER BY l.created_at DESC 
             LIMIT ?
-            """
+            """, [post_id, limit]
         )
         row = cur.fetchall()
-        return row
+        return row if row else []
 
     def has_liked(self, user_id: int, post_id: int):
         cur = self.conn.execute(
