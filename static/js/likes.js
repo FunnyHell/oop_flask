@@ -3,6 +3,7 @@ async function toggleLike(postId) {
         const response = await fetch(
             `/api/like/${postId}`,
             {
+                credentials: "same-origin",
                 method: "UPDATE",
             }
         )
@@ -24,3 +25,27 @@ async function toggleLike(postId) {
         console.log(error);
     }
 }
+
+async function loadLikeState(postId, button) {
+    try {
+        const response = await fetch(`/api/like/${postId}`, {
+            credentials: "same-origin",
+        })
+        const data = await response.json();
+        if (data.success) {
+        //     TODO: Check_like
+        }
+    } catch (error) {
+        console.log("Ошибка загрузки: ", error)
+    }
+}
+
+// DOM — Document Object Model
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".like-btn__btn").forEach(button => {
+        const postId = button.dataset.postId;
+        loadLikeState(postId, button);
+        button.addEventListener("click", () => toggleLike(postId))
+    })
+})

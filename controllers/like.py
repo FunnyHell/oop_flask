@@ -231,4 +231,7 @@ class LikeController:
         pass
 
     def check_like(self):
+        # TODO: Поиск информации поставил ли юзер лайк на пост.
+        #  return {'success': true, 'has_liked': true|false}
+        #  return {'success': false, 'message': 'текст ошибки'}
         pass
