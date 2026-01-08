@@ -230,8 +230,12 @@ class LikeController:
     def get_user_likes(self):
         pass
 
-    def check_like(self):
-        # TODO: Поиск информации поставил ли юзер лайк на пост.
-        #  return {'success': true, 'has_liked': true|false}
-        #  return {'success': false, 'message': 'текст ошибки'}
-        pass
+    def check_like(self, post_id):
+        conn = self.get_db()
+        like_model = Like(conn)
+        user_id = g.user["id"]
+        status = like_model.has_liked(user_id, post_id)
+        return jsonify({
+            "success": True,
+            "has_liked": True if status else False,
+        })

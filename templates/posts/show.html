@@ -7,13 +7,13 @@
         <div class="like-btn">
             <button class="like-btn__btn" data-post-id="{{ post['id'] }}" type="button">
                 <i class="like-icon fa-solid fa-heart"></i>
-                <span class="like_count">{{ post['likes'] }}</span>
+                <span class="like-count">{{ post['likes'] }}</span>
             </button>
         </div>
     {% else %}
         <div>
             <i class="fa-solid fa-heart"></i>
-            <span class="like_count">{{ post['likes'] }}</span>
+            <span class="like-count">{{ post['likes'] }}</span>
         </div>
     {% endif %}
 

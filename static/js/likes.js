@@ -32,8 +32,10 @@ async function loadLikeState(postId, button) {
             credentials: "same-origin",
         })
         const data = await response.json();
-        if (data.success) {
-        //     TODO: Check_like
+        if (data.success && data.has_liked) {
+            const icon = button.querySelector('.like-icon');
+            icon.classList.replace('fa-regular', 'fa-solid');
+            icon.style.color = '#f56565';
         }
     } catch (error) {
         console.log("Ошибка загрузки: ", error)

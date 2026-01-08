@@ -106,5 +106,7 @@ class Application:
             """
         )
 
+        # TODO: Комментарии: author_id, post_id
+
         conn.commit()
         conn.close()

@@ -1,4 +1,5 @@
 from flask import redirect, url_for
+from extensions import socketio
 
 from app_core.app import Application
 from blueprints.auth import create_auth_blueprint
@@ -10,6 +11,11 @@ from controllers.posts import PostsController
 
 core = Application()
 app = core.flask
+socketio.init_app(app)
+
+@socketio.on("join_post")
+def on_join(data):
+    pass
 
 posts_controller = PostsController(core.get_db)
 auth_controller = AuthController(core.get_db, session_ttl_minutes=60 * 24 * 7)
@@ -31,4 +37,4 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    socketio.run(app, debug=True)
