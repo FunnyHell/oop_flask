@@ -24,8 +24,26 @@
             <button type="submit">Удалить</button>
         </form>
     {% endif %}
+
+<input type="hidden" id="post-id" value="{{ post['id'] }}">
+<input type="hidden" id="current-user-id" value="{{ g.user.id if g.user else '' }}">
+<div id="comments-section">
+    <h3>Комментарии</h3>
+    {% if g.user %}
+        <form id="comment-form">
+            <textarea name="comment-input" id="comment-input" rows="4" placeholder="Ваш комментарий..."
+                      required></textarea>
+            <button type="submit">Отправить</button>
+        </form>
+    {% endif %}
+
+    <div id="comments-container"></div>
+</div>
+
 {% endblock %}
 
 {% block script %}
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
     <script src="{{ url_for('static', filename='js/likes.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/comments.js') }}"></script>
 {% endblock %}
